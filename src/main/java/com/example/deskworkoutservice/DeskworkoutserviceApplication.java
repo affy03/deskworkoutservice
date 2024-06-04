@@ -9,5 +9,4 @@ public class DeskworkoutserviceApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(DeskworkoutserviceApplication.class, args);
 	}
-
 }
