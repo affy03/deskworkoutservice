@@ -1,7 +1,7 @@
 package com.example.deskworkoutservice;
 
 public class Deskworkout {
-    private final int id;
+    private final Integer id;
 
     private final String name;
 
@@ -15,6 +15,16 @@ public class Deskworkout {
 
     public Deskworkout(int id, String name, String howto, int repetition, String bodyparts, String difficulty) {
         this.id = id;
+        this.name = name;
+        this.howto = howto;
+        this.repetition = repetition;
+        this.bodyparts = bodyparts;
+        this.difficulty = difficulty;
+    }
+
+    public Deskworkout(String name, String howto, int repetition, String bodyparts, String difficulty) {
+        // id ‚Í INSERT•¶”­s‚É MySQL‚É‚æ‚Á‚Ä©“®Ì”Ô‚µ‚½’l‚ª•âŠ®‚³‚ê‚é‚Ì‚Å null ‚ğİ’è
+        this.id = null;
         this.name = name;
         this.howto = howto;
         this.repetition = repetition;

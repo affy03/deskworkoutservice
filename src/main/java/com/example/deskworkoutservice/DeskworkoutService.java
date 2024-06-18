@@ -29,4 +29,10 @@ public class DeskworkoutService {
             throw new DeskworkoutNotFoundException("Workout with id:" + id + " not found");
         }
     }
+
+    public Deskworkout insert(String name, String howto, int repetition, String bodyparts, String difficulty) {
+        Deskworkout deskworkout = new Deskworkout(name, howto, repetition, bodyparts, difficulty);
+        deskworkoutMapper.insert(deskworkout);
+        return deskworkout;
+    }
 }
