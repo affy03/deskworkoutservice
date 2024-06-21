@@ -6,7 +6,7 @@ public class DeskworkoutRequest {
 
     private String howto;
 
-    private int repetition;
+    private Integer repetition;
 
     private String bodyparts;
 

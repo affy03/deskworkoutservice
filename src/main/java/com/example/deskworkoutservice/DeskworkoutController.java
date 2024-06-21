@@ -51,7 +51,13 @@ public class DeskworkoutController {
 
     @PostMapping("/deskworkouts")
     public ResponseEntity<DeskworkoutResponse> insert(@RequestBody DeskworkoutRequest deskworkoutRequest, UriComponentsBuilder uriBuilder) {
-        Deskworkout deskworkout = deskworkoutService.insert(deskworkoutRequest.getName(), deskworkoutRequest.getHowto(), deskworkoutRequest.getRepetition(), deskworkoutRequest.getBodyparts(), deskworkoutRequest.getDifficulty());
+        Deskworkout deskworkout = deskworkoutService.insert(
+                deskworkoutRequest.getName(),
+                deskworkoutRequest.getHowto(),
+                deskworkoutRequest.getRepetition(),
+                deskworkoutRequest.getBodyparts(),
+                deskworkoutRequest.getDifficulty()
+        );
         URI location = uriBuilder.path("/deskworkouts/{id}").buildAndExpand(deskworkout.getId()).toUri();
         DeskworkoutResponse body = new DeskworkoutResponse("deskworkout created");
         return ResponseEntity.created(location).body(body);

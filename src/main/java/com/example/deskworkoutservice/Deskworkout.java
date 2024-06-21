@@ -1,17 +1,32 @@
 package com.example.deskworkoutservice;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "deskworkouts")
 public class Deskworkout {
-    private final Integer id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
-    private final String name;
+    @Column(nullable = false, length = 20)
+    private String name;
 
-    private final String howto;
+    @Column(length = 200, nullable = false, columnDefinition = "VARCHAR(200) DEFAULT 'æœªè¨­å®š'")
+    private String howto;
 
-    private final int repetition;
+    @Column(nullable = false, columnDefinition = "INT DEFAULT 0")
+    private Integer repetition;
+    @Column(length = 100, nullable = false, columnDefinition = "VARCHAR(100) DEFAULT 'æœªè¨­å®š'")
+    private String bodyparts;
 
-    private final String bodyparts;
-
-    private final String difficulty;
+    @Column(length = 20, nullable = false, columnDefinition = "VARCHAR(20) DEFAULT 'æœªè¨­å®š'")
+    private String difficulty;
 
     public Deskworkout(int id, String name, String howto, int repetition, String bodyparts, String difficulty) {
         this.id = id;
@@ -23,7 +38,7 @@ public class Deskworkout {
     }
 
     public Deskworkout(String name, String howto, int repetition, String bodyparts, String difficulty) {
-        // id ‚Í INSERT•¶”­s‚É MySQL‚É‚æ‚Á‚Ä©“®Ì”Ô‚µ‚½’l‚ª•âŠ®‚³‚ê‚é‚Ì‚Å null ‚ğİ’è
+        // id ã¯ INSERTæ–‡ç™ºè¡Œæ™‚ã« MySQLã«ã‚ˆã£ã¦è‡ªå‹•æ¡ç•ªã—ãŸå€¤ãŒè£œå®Œã•ã‚Œã‚‹ã®ã§ null ã‚’è¨­å®š
         this.id = null;
         this.name = name;
         this.howto = howto;
@@ -31,6 +46,11 @@ public class Deskworkout {
         this.bodyparts = bodyparts;
         this.difficulty = difficulty;
     }
+
+    public Deskworkout() {
+        // ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
+    }
+
 
     public int getId() {
         return id;
@@ -54,5 +74,29 @@ public class Deskworkout {
 
     public String getDifficulty() {
         return difficulty;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setHowto(String howto) {
+        this.howto = howto;
+    }
+
+    public void setRepetition(int repetition) {
+        this.repetition = repetition;
+    }
+
+    public void setBodyparts(String bodyparts) {
+        this.bodyparts = bodyparts;
+    }
+
+    public void setDifficulty(String difficulty) {
+        this.difficulty = difficulty;
     }
 }

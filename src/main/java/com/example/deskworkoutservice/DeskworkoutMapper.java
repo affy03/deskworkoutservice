@@ -24,3 +24,5 @@ public interface DeskworkoutMapper {
     @Options(useGeneratedKeys = true, keyProperty = "id")
     void insert(Deskworkout deskworkout);
 }
+
+
