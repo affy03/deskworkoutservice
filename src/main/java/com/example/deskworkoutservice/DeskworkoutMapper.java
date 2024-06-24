@@ -20,9 +20,7 @@ public interface DeskworkoutMapper {
     @Select("SELECT * FROM deskworkouts WHERE id = #{id}")
     Optional<Deskworkout> findById(int id);
 
-    @Insert("INSERT INTO deskworkouts  (name, howto, repetition, bodyparts, difficulty ) VALUES (#{name},#{howto},#{repetition},#{bodyparts},#{difficulty}) ")
+    @Insert("INSERT INTO deskworkouts  (name, howto, repetition, bodyparts, difficulty ) VALUES (#{name},#{howto},#{repetition},#{bodyparts},#{difficulty})")
     @Options(useGeneratedKeys = true, keyProperty = "id")
     void insert(Deskworkout deskworkout);
 }
-
-

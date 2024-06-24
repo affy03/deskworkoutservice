@@ -32,14 +32,13 @@ public class DeskworkoutService {
         }
     }
 
-
     public Deskworkout insert(String name, String howto, Integer repetition, String bodyparts, String difficulty) {
         Deskworkout deskworkout = new Deskworkout();
         deskworkout.setName(name);
-        deskworkout.setHowto(howto != null && !howto.isEmpty() ? howto : "未設定");
-        deskworkout.setRepetition(repetition != null ? repetition : 0);
-        deskworkout.setBodyparts(bodyparts != null && !bodyparts.isEmpty() ? bodyparts : "未設定");
-        deskworkout.setDifficulty(difficulty != null && !difficulty.isEmpty() ? difficulty : "未設定");
+        deskworkout.setHowto(howto);
+        deskworkout.setRepetition(repetition);
+        deskworkout.setBodyparts(bodyparts);
+        deskworkout.setDifficulty(difficulty);
         deskworkoutMapper.insert(deskworkout);
         return deskworkout;
     }

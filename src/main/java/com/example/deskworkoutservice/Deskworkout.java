@@ -22,6 +22,7 @@ public class Deskworkout {
 
     @Column(nullable = false, columnDefinition = "INT DEFAULT 0")
     private Integer repetition;
+
     @Column(length = 100, nullable = false, columnDefinition = "VARCHAR(100) DEFAULT '未設定'")
     private String bodyparts;
 
@@ -39,7 +40,6 @@ public class Deskworkout {
 
     public Deskworkout(String name, String howto, int repetition, String bodyparts, String difficulty) {
         // id は INSERT文発行時に MySQLによって自動採番した値が補完されるので null を設定
-        this.id = null;
         this.name = name;
         this.howto = howto;
         this.repetition = repetition;
@@ -50,7 +50,6 @@ public class Deskworkout {
     public Deskworkout() {
         // デフォルトコンストラクタ
     }
-
 
     public int getId() {
         return id;
