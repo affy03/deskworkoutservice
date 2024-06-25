@@ -3,10 +3,10 @@ DROP TABLE IF EXISTS deskworkouts;
 CREATE TABLE deskworkouts (
   id int unsigned AUTO_INCREMENT,
   name VARCHAR(20) NOT NULL,
-  howto VARCHAR(100) NOT NULL,
-  repetition INTEGER(100) NOT NULL,
-  bodyparts VARCHAR(100) NOT NULL,
-  difficulty VARCHAR(20) NOT NULL,
+  howto VARCHAR(200) NOT NULL DEFAULT '未設定',
+  repetition INT NOT NULL DEFAULT 0,
+  bodyparts VARCHAR(100)  NOT NULL DEFAULT '未設定',
+  difficulty VARCHAR(20)  NOT NULL DEFAULT '未設定',
   PRIMARY KEY(id)
 );
 

@@ -1,5 +1,6 @@
 package com.example.deskworkoutservice;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -7,6 +8,7 @@ import java.util.Optional;
 
 @Service
 public class DeskworkoutService {
+    @Autowired
     private final DeskworkoutMapper deskworkoutMapper;
 
     public DeskworkoutService(DeskworkoutMapper deskworkoutMapper) {
@@ -28,5 +30,16 @@ public class DeskworkoutService {
         } else {
             throw new DeskworkoutNotFoundException("Workout with id:" + id + " not found");
         }
+    }
+
+    public Deskworkout insert(String name, String howto, Integer repetition, String bodyparts, String difficulty) {
+        Deskworkout deskworkout = new Deskworkout();
+        deskworkout.setName(name);
+        deskworkout.setHowto(howto);
+        deskworkout.setRepetition(repetition);
+        deskworkout.setBodyparts(bodyparts);
+        deskworkout.setDifficulty(difficulty);
+        deskworkoutMapper.insert(deskworkout);
+        return deskworkout;
     }
 }

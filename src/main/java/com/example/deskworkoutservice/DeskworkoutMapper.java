@@ -1,6 +1,8 @@
 package com.example.deskworkoutservice;
 
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
@@ -17,4 +19,8 @@ public interface DeskworkoutMapper {
 
     @Select("SELECT * FROM deskworkouts WHERE id = #{id}")
     Optional<Deskworkout> findById(int id);
+
+    @Insert("INSERT INTO deskworkouts  (name, howto, repetition, bodyparts, difficulty ) VALUES (#{name},#{howto},#{repetition},#{bodyparts},#{difficulty})")
+    @Options(useGeneratedKeys = true, keyProperty = "id")
+    void insert(Deskworkout deskworkout);
 }
