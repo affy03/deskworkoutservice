@@ -1,5 +1,6 @@
 package com.example.deskworkoutservice;
 
+//デスクワークアウト情報の登録 更新に使用
 public class DeskworkoutRequest {
 
     private String name;
