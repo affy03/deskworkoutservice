@@ -3,6 +3,7 @@ package com.example.deskworkoutservice;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -74,6 +75,13 @@ public class DeskworkoutController {
                 deskworkoutRequest.getBodyparts(),
                 deskworkoutRequest.getDifficulty());
         DeskworkoutResponse body = new DeskworkoutResponse("deskworkout updated");
+        return ResponseEntity.ok(body);
+    }
+
+    @DeleteMapping("/deskworkouts/{id}")
+    public ResponseEntity<DeskworkoutResponse> delete(@PathVariable int id) {
+        deskworkoutService.delete(id);
+        DeskworkoutResponse body = new DeskworkoutResponse("deskworkout deleted");
         return ResponseEntity.ok(body);
     }
 }

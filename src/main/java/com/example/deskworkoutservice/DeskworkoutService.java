@@ -38,7 +38,7 @@ public class DeskworkoutService {
         return deskworkout;
     }
 
-    public Deskworkout update(Integer id, String name, String howto, Integer repetition, String bodyparts, String difficulty) {
+    public void update(Integer id, String name, String howto, Integer repetition, String bodyparts, String difficulty) {
         Deskworkout deskworkout = deskworkoutMapper.findById(id)
                 .orElseThrow(() -> new DeskworkoutNotFoundException("Workout with id:" + id + " not found"));
 
@@ -49,6 +49,11 @@ public class DeskworkoutService {
         deskworkout.setDifficulty(difficulty);
 
         deskworkoutMapper.update(deskworkout);
-        return deskworkout;
+    }
+
+    public void delete(int id) {
+        deskworkoutMapper.findById(id)
+                .orElseThrow(() -> new DeskworkoutNotFoundException("Workout with id:" + id + " not found"));
+        deskworkoutMapper.delete(id);
     }
 }

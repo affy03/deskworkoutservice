@@ -1,5 +1,6 @@
 package com.example.deskworkoutservice;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Options;
@@ -27,4 +28,7 @@ public interface DeskworkoutMapper {
 
     @Update("UPDATE deskworkouts SET name=#{name}, howto=#{howto}, repetition=#{repetition}, bodyparts=#{bodyparts}, difficulty=#{difficulty} WHERE id = #{id}")
     void update(Deskworkout deskworkout);
+
+    @Delete("DELETE FROM deskworkouts WHERE id = #{id}")
+    void delete(int id);
 }
