@@ -4,6 +4,7 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import java.util.List;
 import java.util.Optional;
@@ -23,4 +24,7 @@ public interface DeskworkoutMapper {
     @Insert("INSERT INTO deskworkouts  (name, howto, repetition, bodyparts, difficulty ) VALUES (#{name},#{howto},#{repetition},#{bodyparts},#{difficulty})")
     @Options(useGeneratedKeys = true, keyProperty = "id")
     void insert(Deskworkout deskworkout);
+
+    @Update("UPDATE deskworkouts SET name=#{name}, howto=#{howto}, repetition=#{repetition}, bodyparts=#{bodyparts}, difficulty=#{difficulty} WHERE id = #{id}")
+    void update(Deskworkout deskworkout);
 }
