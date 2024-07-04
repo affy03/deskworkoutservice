@@ -1,10 +1,8 @@
 package com.example.deskworkoutservice;
 
-import jakarta.servlet.http.HttpServletRequest;
-import org.springframework.http.HttpStatus;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,9 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
-import java.time.ZonedDateTime;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 public class DeskworkoutController {
@@ -38,21 +34,8 @@ public class DeskworkoutController {
         return deskworkoutService.findById(id);
     }
 
-    @ExceptionHandler(value = DeskworkoutNotFoundException.class)
-    public ResponseEntity<Map<String, String>> handleDeskworkoutNotFoundException(
-            DeskworkoutNotFoundException e, HttpServletRequest request) {
-        Map<String, String> body = Map.of(
-                "timestamp", ZonedDateTime.now().toString(),
-                "status", String.valueOf(HttpStatus.NOT_FOUND.value()),
-                "error", HttpStatus.NOT_FOUND.getReasonPhrase(),
-                "message", e.getMessage(),
-                "path", request.getRequestURI());
-        return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
-    }
-
-
     @PostMapping("/deskworkouts")
-    public ResponseEntity<DeskworkoutResponse> insert(@RequestBody DeskworkoutRequest deskworkoutRequest, UriComponentsBuilder uriBuilder) {
+    public ResponseEntity<DeskworkoutResponse> insert(@RequestBody @Valid DeskworkoutRequest deskworkoutRequest, UriComponentsBuilder uriBuilder) {
         Deskworkout deskworkout = deskworkoutService.insert(
                 deskworkoutRequest.getName(),
                 deskworkoutRequest.getHowto(),
@@ -66,7 +49,7 @@ public class DeskworkoutController {
     }
 
     @PatchMapping("/deskworkouts/{id}")
-    public ResponseEntity<DeskworkoutResponse> update(@PathVariable("id") int id, @RequestBody DeskworkoutRequest deskworkoutRequest) {
+    public ResponseEntity<DeskworkoutResponse> update(@PathVariable("id") int id, @RequestBody @Valid DeskworkoutRequest deskworkoutRequest) {
         deskworkoutService.update(
                 id,
                 deskworkoutRequest.getName(),
