@@ -9,11 +9,11 @@ import jakarta.validation.constraints.Size;
 public class DeskworkoutRequest {
 
     @NotBlank(message = "空白は許可されていません")
-    @Size(max = 20, message = "名前は20文字以内で入力してください")
+    @Size(max = 20, message = "名前は{max}文字以内で入力してください")
     private String name;
 
     @NotBlank(message = "空白は許可されていません")
-    @Size(max = 100, message = "動作説明は100文字以内で入力してください")
+    @Size(max = 100, message = "動作説明は{max}文字以内で入力してください")
     private String howto;
 
     @NotNull(message = "空白は許可されていません")
@@ -21,11 +21,11 @@ public class DeskworkoutRequest {
     private Integer repetition;
 
     @NotBlank(message = "空白は許可されていません")
-    @Size(max = 100, message = "部位は100文字以内で入力してください")
+    @Size(max = 100, message = "部位は{max}文字以内で入力してください")
     private String bodyparts;
 
     @NotBlank(message = "空白は許可されていません")
-    @Size(max = 20, message = "難易度は20文字以内で入力してください")
+    @Size(max = 20, message = "難易度は{max}文字以内で入力してください")
     private String difficulty;
 
     public DeskworkoutRequest(String name, String howto, int repetition, String bodyparts, String difficulty) {
