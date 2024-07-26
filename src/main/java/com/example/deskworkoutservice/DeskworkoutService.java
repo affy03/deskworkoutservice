@@ -14,6 +14,10 @@ public class DeskworkoutService {
         this.deskworkoutMapper = deskworkoutMapper;
     }
 
+    public List<Deskworkout> findAll() {
+        return deskworkoutMapper.findAll();
+    }
+
     public List<Deskworkout> findByBodypartsStartingWith(String bodyparts) {
         if (bodyparts != null && !bodyparts.isEmpty()) {
             return deskworkoutMapper.findByBodypartsStartingWith(bodyparts);

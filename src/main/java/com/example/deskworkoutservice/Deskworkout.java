@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.util.Objects;
 
 @Entity
 @Table(name = "deskworkouts")
@@ -97,5 +98,34 @@ public class Deskworkout {
 
     public void setDifficulty(String difficulty) {
         this.difficulty = difficulty;
+    }
+
+    //equals メソッドのオーバーライド
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Deskworkout that = (Deskworkout) o;
+        return repetition == that.repetition &&
+                Objects.equals(name, that.name) &&
+                Objects.equals(howto, that.howto) &&
+                Objects.equals(bodyparts, that.bodyparts) &&
+                Objects.equals(difficulty, that.difficulty);
+    }
+
+    // hashCode メソッドのオーバーライド
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, howto, repetition, bodyparts, difficulty);
+    }
+
+    @Override
+    public String toString() {
+        return "{\"id\":" + id +
+                ",\"name\":\"" + name + "\"" +
+                ",\"howto\":\"" + howto + "\"" +
+                ",\"repetition\":" + repetition +
+                ",\"bodyparts\":\"" + bodyparts + "\"" +
+                ",\"difficulty\":\"" + difficulty + "\"}";
     }
 }
