@@ -19,32 +19,32 @@ public class Deskworkout {
     private String name;
 
     @Column(length = 200, nullable = false, columnDefinition = "VARCHAR(200) DEFAULT '未設定'")
-    private String howto;
+    private String howTo;
 
     @Column(nullable = false, columnDefinition = "INT DEFAULT 0")
     private Integer repetition;
 
     @Column(length = 100, nullable = false, columnDefinition = "VARCHAR(100) DEFAULT '未設定'")
-    private String bodyparts;
+    private String bodyParts;
 
     @Column(length = 20, nullable = false, columnDefinition = "VARCHAR(20) DEFAULT '未設定'")
     private String difficulty;
 
-    public Deskworkout(int id, String name, String howto, int repetition, String bodyparts, String difficulty) {
+    public Deskworkout(int id, String name, String howTo, int repetition, String bodyParts, String difficulty) {
         this.id = id;
         this.name = name;
-        this.howto = howto;
+        this.howTo = howTo;
         this.repetition = repetition;
-        this.bodyparts = bodyparts;
+        this.bodyParts = bodyParts;
         this.difficulty = difficulty;
     }
 
-    public Deskworkout(String name, String howto, int repetition, String bodyparts, String difficulty) {
+    public Deskworkout(String name, String howTo, int repetition, String bodyParts, String difficulty) {
         // id は INSERT文発行時に MySQLによって自動採番した値が補完されるので null を設定
         this.name = name;
-        this.howto = howto;
+        this.howTo = howTo;
         this.repetition = repetition;
-        this.bodyparts = bodyparts;
+        this.bodyParts = bodyParts;
         this.difficulty = difficulty;
     }
 
@@ -61,15 +61,15 @@ public class Deskworkout {
     }
 
     public String getHowto() {
-        return howto;
+        return howTo;
     }
 
     public int getRepetition() {
         return repetition;
     }
 
-    public String getBodyparts() {
-        return bodyparts;
+    public String getBodyParts() {
+        return bodyParts;
     }
 
     public String getDifficulty() {
@@ -84,16 +84,16 @@ public class Deskworkout {
         this.name = name;
     }
 
-    public void setHowto(String howto) {
-        this.howto = howto;
+    public void setHowto(String howTo) {
+        this.howTo = howTo;
     }
 
     public void setRepetition(int repetition) {
         this.repetition = repetition;
     }
 
-    public void setBodyparts(String bodyparts) {
-        this.bodyparts = bodyparts;
+    public void setBodyParts(String bodyParts) {
+        this.bodyParts = bodyParts;
     }
 
     public void setDifficulty(String difficulty) {
@@ -108,24 +108,24 @@ public class Deskworkout {
         Deskworkout that = (Deskworkout) o;
         return repetition == that.repetition &&
                 Objects.equals(name, that.name) &&
-                Objects.equals(howto, that.howto) &&
-                Objects.equals(bodyparts, that.bodyparts) &&
+                Objects.equals(howTo, that.howTo) &&
+                Objects.equals(bodyParts, that.bodyParts) &&
                 Objects.equals(difficulty, that.difficulty);
     }
 
     // hashCode メソッドのオーバーライド
     @Override
     public int hashCode() {
-        return Objects.hash(name, howto, repetition, bodyparts, difficulty);
+        return Objects.hash(name, howTo, repetition, bodyParts, difficulty);
     }
 
     @Override
     public String toString() {
         return "{\"id\":" + id +
                 ",\"name\":\"" + name + "\"" +
-                ",\"howto\":\"" + howto + "\"" +
+                ",\"howto\":\"" + howTo + "\"" +
                 ",\"repetition\":" + repetition +
-                ",\"bodyparts\":\"" + bodyparts + "\"" +
+                ",\"bodyparts\":\"" + bodyParts + "\"" +
                 ",\"difficulty\":\"" + difficulty + "\"}";
     }
 }

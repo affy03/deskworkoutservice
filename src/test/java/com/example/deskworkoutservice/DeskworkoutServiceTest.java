@@ -12,7 +12,6 @@ import java.util.Optional;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
@@ -25,7 +24,7 @@ class DeskworkoutServiceTest {
     private DeskworkoutMapper deskworkoutMapper;//インスタンス変数
 
     @Test
-    public void null又は空のクエリ文字列を渡したときに全てのレコードを取得できること() {
+    public void nullのクエリ文字列を渡したときに全てのレコードを取得できること() {
         List<Deskworkout> deskworkouts = List.of(
                 new Deskworkout(1, "シットアップ", "直角に曲げた膝を机裏にタッチする", 10, "お腹", "初級"),
                 new Deskworkout(2, "バックエクステンション", "お尻を背もたれに付けたまま、デコルテを机に近づける", 10, "背中", "中級"),
@@ -34,11 +33,24 @@ class DeskworkoutServiceTest {
                 new Deskworkout(5, "スクワット", "片膝を斜め横に向けたまま、お尻を椅子から持ち上げる", 10, "お尻", "上級")
         );
         doReturn(deskworkouts).when(deskworkoutMapper).findAll();
-        List<Deskworkout> actualEmptyString = deskworkoutService.findByBodypartsStartingWith("");
-        List<Deskworkout> actualNull = deskworkoutService.findByBodypartsStartingWith(null);
-        assertThat(actualEmptyString).isEqualTo(deskworkouts);
+        List<Deskworkout> actualNull = deskworkoutService.findByBodyPartsStartingWith(null);
         assertThat(actualNull).isEqualTo(deskworkouts);
-        verify(deskworkoutMapper, times(2)).findAll();
+        verify(deskworkoutMapper).findAll();
+    }
+
+    @Test
+    public void 空のクエリ文字列を渡したときに全てのレコードを取得できること() {
+        List<Deskworkout> deskworkouts = List.of(
+                new Deskworkout(1, "シットアップ", "直角に曲げた膝を机裏にタッチする", 10, "お腹", "初級"),
+                new Deskworkout(2, "バックエクステンション", "お尻を背もたれに付けたまま、デコルテを机に近づける", 10, "背中", "中級"),
+                new Deskworkout(3, "ショルダーダウン", "肘で背もたれを押したまま、肩を引き下げる", 1, "肩", "初級"),
+                new Deskworkout(4, "ニーエクステンション", "内ももをくっ付けたまま、膝を伸ばす", 10, "脚", "初級"),
+                new Deskworkout(5, "スクワット", "片膝を斜め横に向けたまま、お尻を椅子から持ち上げる", 10, "お尻", "上級")
+        );
+        doReturn(deskworkouts).when(deskworkoutMapper).findAll();
+        List<Deskworkout> actualEmptyString = deskworkoutService.findByBodyPartsStartingWith("");
+        assertThat(actualEmptyString).isEqualTo(deskworkouts);
+        verify(deskworkoutMapper).findAll();
     }
 
     @Test

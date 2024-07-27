@@ -16,17 +16,17 @@ public interface DeskworkoutMapper {
     @Select("SELECT * FROM deskworkouts")
     List<Deskworkout> findAll();
 
-    @Select("SELECT * FROM deskworkouts WHERE bodyparts LIKE CONCAT (#{bodyparts}, '%' )")
-    List<Deskworkout> findByBodypartsStartingWith(String bodyparts);
+    @Select("SELECT * FROM deskworkouts WHERE bodyParts LIKE CONCAT (#{bodyParts}, '%' )")
+    List<Deskworkout> findByBodyPartsStartingWith(String bodyParts);
 
     @Select("SELECT * FROM deskworkouts WHERE id = #{id}")
     Optional<Deskworkout> findById(int id);
 
-    @Insert("INSERT INTO deskworkouts  (name, howto, repetition, bodyparts, difficulty ) VALUES (#{name},#{howto},#{repetition},#{bodyparts},#{difficulty})")
+    @Insert("INSERT INTO deskworkouts  (name, howTo, repetition, bodyParts, difficulty ) VALUES (#{name},#{howTo},#{repetition},#{bodyParts},#{difficulty})")
     @Options(useGeneratedKeys = true, keyProperty = "id")
     void insert(Deskworkout deskworkout);
 
-    @Update("UPDATE deskworkouts SET name=#{name}, howto=#{howto}, repetition=#{repetition}, bodyparts=#{bodyparts}, difficulty=#{difficulty} WHERE id = #{id}")
+    @Update("UPDATE deskworkouts SET name=#{name}, howTo=#{howTo}, repetition=#{repetition}, bodyParts=#{bodyParts}, difficulty=#{difficulty} WHERE id = #{id}")
     void update(Deskworkout deskworkout);
 
     @Delete("DELETE FROM deskworkouts WHERE id = #{id}")

@@ -25,8 +25,8 @@ public class DeskworkoutController {
     }
 
     @GetMapping("/deskworkouts")
-    public List<Deskworkout> findByBodyparts(@RequestParam(value = "bodyparts", required = false) String bodyparts) {
-        return deskworkoutService.findByBodypartsStartingWith(bodyparts);
+    public List<Deskworkout> findByBodyparts(@RequestParam(value = "bodyParts", required = false) String bodyParts) {
+        return deskworkoutService.findByBodyPartsStartingWith(bodyParts);
     }
 
     @GetMapping("/deskworkouts/{id}")
@@ -38,9 +38,9 @@ public class DeskworkoutController {
     public ResponseEntity<DeskworkoutResponse> insert(@RequestBody @Valid DeskworkoutRequest deskworkoutRequest, UriComponentsBuilder uriBuilder) {
         Deskworkout deskworkout = deskworkoutService.insert(
                 deskworkoutRequest.getName(),
-                deskworkoutRequest.getHowto(),
+                deskworkoutRequest.getHowTo(),
                 deskworkoutRequest.getRepetition(),
-                deskworkoutRequest.getBodyparts(),
+                deskworkoutRequest.getBodyParts(),
                 deskworkoutRequest.getDifficulty()
         );
         URI location = uriBuilder.path("/deskworkouts/{id}").buildAndExpand(deskworkout.getId()).toUri();
@@ -53,9 +53,9 @@ public class DeskworkoutController {
         deskworkoutService.update(
                 id,
                 deskworkoutRequest.getName(),
-                deskworkoutRequest.getHowto(),
+                deskworkoutRequest.getHowTo(),
                 deskworkoutRequest.getRepetition(),
-                deskworkoutRequest.getBodyparts(),
+                deskworkoutRequest.getBodyParts(),
                 deskworkoutRequest.getDifficulty());
         DeskworkoutResponse body = new DeskworkoutResponse("deskworkout updated");
         return ResponseEntity.ok(body);
