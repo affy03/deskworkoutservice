@@ -14,9 +14,9 @@ public class DeskworkoutService {
         this.deskworkoutMapper = deskworkoutMapper;
     }
 
-    public List<Deskworkout> findByBodypartsStartingWith(String bodyparts) {
-        if (bodyparts != null && !bodyparts.isEmpty()) {
-            return deskworkoutMapper.findByBodypartsStartingWith(bodyparts);
+    public List<Deskworkout> findByBodyPartsStartingWith(String bodyParts) {
+        if (bodyParts != null && !bodyParts.isEmpty()) {
+            return deskworkoutMapper.findByBodyPartsStartingWith(bodyParts);
         } else {
             return deskworkoutMapper.findAll();
         }
@@ -27,25 +27,25 @@ public class DeskworkoutService {
                 .orElseThrow(() -> new DeskworkoutNotFoundException("Workout with id:" + id + " not found"));
     }
 
-    public Deskworkout insert(String name, String howto, Integer repetition, String bodyparts, String difficulty) {
+    public Deskworkout insert(String name, String howTo, Integer repetition, String bodyParts, String difficulty) {
         Deskworkout deskworkout = new Deskworkout();
         deskworkout.setName(name);
-        deskworkout.setHowto(howto);
+        deskworkout.setHowto(howTo);
         deskworkout.setRepetition(repetition);
-        deskworkout.setBodyparts(bodyparts);
+        deskworkout.setBodyParts(bodyParts);
         deskworkout.setDifficulty(difficulty);
         deskworkoutMapper.insert(deskworkout);
         return deskworkout;
     }
 
-    public void update(Integer id, String name, String howto, Integer repetition, String bodyparts, String difficulty) {
+    public void update(Integer id, String name, String howTo, Integer repetition, String bodyParts, String difficulty) {
         Deskworkout deskworkout = deskworkoutMapper.findById(id)
                 .orElseThrow(() -> new DeskworkoutNotFoundException("Workout with id:" + id + " not found"));
 
         deskworkout.setName(name);
-        deskworkout.setHowto(howto);
+        deskworkout.setHowto(howTo);
         deskworkout.setRepetition(repetition);
-        deskworkout.setBodyparts(bodyparts);
+        deskworkout.setBodyParts(bodyParts);
         deskworkout.setDifficulty(difficulty);
 
         deskworkoutMapper.update(deskworkout);
