@@ -11,7 +11,11 @@ import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
@@ -68,5 +72,51 @@ class DeskworkoutServiceTest {
         assertThatThrownBy(() -> deskworkoutService.findById(100))
                 .isInstanceOf(DeskworkoutNotFoundException.class);
         verify(deskworkoutMapper).findById(100);
+    }
+
+    @Test
+    public void 新しいレコードを登録できること() {
+        Deskworkout deskworkout = new Deskworkout("シットアップ", "直角に曲げた膝を机裏にタッチする", 10, "お腹", "初級");
+        assertThat(deskworkoutService.insert("シットアップ", "直角に曲げた膝を机裏にタッチする", 10, "お腹", "初級")).isEqualTo(deskworkout);
+        verify(deskworkoutMapper).insert(deskworkout);
+    }
+
+    @Test
+    public void レコードを更新できること() {
+        Deskworkout deskworkout = new Deskworkout(1, "name", "howTo", 10, "bodyParts", "level");
+        doReturn(Optional.of(deskworkout)).when(deskworkoutMapper).findById(1);
+        deskworkoutService.update(1, "new name", "new howTo", 5, "new bodyParts", "new level");
+        assertEquals("new name", deskworkout.getName());
+        assertEquals("new howTo", deskworkout.getHowto());
+        assertEquals(5, deskworkout.getRepetition());
+        assertEquals("new bodyParts", deskworkout.getBodyParts());
+        assertEquals("new level", deskworkout.getDifficulty());
+        verify(deskworkoutMapper).update(any(Deskworkout.class));
+    }
+
+    @Test
+    public void 存在しないIDを更新したときは例外が発生すること() {
+        doReturn(Optional.empty()).when(deskworkoutMapper).findById(100);
+        assertThrows(DeskworkoutNotFoundException.class, () -> {
+            deskworkoutService.update(100, "new name", "new howTo", 5, "new bodyParts", "new level");
+        });
+        verify(deskworkoutMapper, never()).update(any(Deskworkout.class));
+    }
+
+    @Test
+    public void 指定したIDのレコードを削除できること() {
+        Deskworkout deskworkout = new Deskworkout(1, "シットアップ", "直角に曲げた膝を机裏にタッチする", 10, "お腹", "初級");
+        doReturn(Optional.of(deskworkout)).when(deskworkoutMapper).findById(1);
+        deskworkoutService.delete(1);
+        verify(deskworkoutMapper).delete(1);
+    }
+
+    @Test
+    public void 存在しないIDのレコードを削除したときに例外が発生すること() {
+        doReturn(Optional.empty()).when(deskworkoutMapper).findById(100);
+        assertThrows(DeskworkoutNotFoundException.class, () -> {
+            deskworkoutService.delete(100);
+        });
+        verify(deskworkoutMapper, never()).delete(100);
     }
 }
