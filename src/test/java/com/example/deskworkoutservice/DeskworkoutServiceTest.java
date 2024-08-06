@@ -11,7 +11,6 @@ import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doReturn;
@@ -59,10 +58,10 @@ class DeskworkoutServiceTest {
 
     @Test
     public void 存在するIDを指定したときに該当するレコードを取得できること() throws Exception {
-        doReturn(Optional.of(new Deskworkout(1, "シットアップ", "直角に曲げた膝を机裏にタッチする", 10, "お腹", "初級")))
-                .when(deskworkoutMapper).findById(1);
+        Deskworkout deskworkout = new Deskworkout(1, "シットアップ", "直角に曲げた膝を机裏にタッチする", 10, "お腹", "初級");
+        doReturn(Optional.of(deskworkout)).when(deskworkoutMapper).findById(1);
         Deskworkout actual = deskworkoutService.findById(1);
-        assertThat(actual).isEqualTo(new Deskworkout(1, "シットアップ", "直角に曲げた膝を机裏にタッチする", 10, "お腹", "初級"));
+        assertThat(actual).isEqualTo(deskworkout);
         verify(deskworkoutMapper).findById(1);
     }
 
@@ -77,7 +76,8 @@ class DeskworkoutServiceTest {
     @Test
     public void 新しいレコードを登録できること() {
         Deskworkout deskworkout = new Deskworkout("シットアップ", "直角に曲げた膝を机裏にタッチする", 10, "お腹", "初級");
-        assertThat(deskworkoutService.insert("シットアップ", "直角に曲げた膝を机裏にタッチする", 10, "お腹", "初級")).isEqualTo(deskworkout);
+        Deskworkout actual = deskworkoutService.insert("シットアップ", "直角に曲げた膝を机裏にタッチする", 10, "お腹", "初級");
+        assertThat(actual).isEqualTo(deskworkout);
         verify(deskworkoutMapper).insert(deskworkout);
     }
 
@@ -85,12 +85,9 @@ class DeskworkoutServiceTest {
     public void レコードを更新できること() {
         Deskworkout deskworkout = new Deskworkout(1, "name", "howTo", 10, "bodyParts", "level");
         doReturn(Optional.of(deskworkout)).when(deskworkoutMapper).findById(1);
-        deskworkoutService.update(1, "new name", "new howTo", 5, "new bodyParts", "new level");
-        assertEquals("new name", deskworkout.getName());
-        assertEquals("new howTo", deskworkout.getHowto());
-        assertEquals(5, deskworkout.getRepetition());
-        assertEquals("new bodyParts", deskworkout.getBodyParts());
-        assertEquals("new level", deskworkout.getDifficulty());
+        Deskworkout actual = deskworkoutService.update(1, "new name", "new howTo", 5, "new bodyParts", "new level");
+        //既存のオブジェクトが更新済みであることを確認
+        assertThat(actual).isEqualTo(deskworkout);
         verify(deskworkoutMapper).update(any(Deskworkout.class));
     }
 
