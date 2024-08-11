@@ -1,6 +1,7 @@
 package com.example.deskworkoutservice;
 
 import com.github.database.rider.core.api.dataset.DataSet;
+import com.github.database.rider.core.api.dataset.ExpectedDataSet;
 import com.github.database.rider.spring.api.DBRider;
 import org.junit.jupiter.api.Test;
 import org.mybatis.spring.boot.test.autoconfigure.MybatisTest;
@@ -55,9 +56,10 @@ class DeskworkoutMapperTest {
 
     @Test
     @DataSet(value = "datasets/deskworkouts.yml")
+    @ExpectedDataSet(value = "expected-datasets/deskworkouts-after-insert.yml", ignoreCols = "id")
     @Transactional
     void 新しいレコードを登録できること() {
-        Deskworkout deskworkout = new Deskworkout("シットアップ", "直角に曲げた膝を机裏にタッチする", 10, "お腹", "初級");
+        Deskworkout deskworkout = new Deskworkout("new name", "new howTo", 5, "new bodyParts", "new level");
         deskworkoutMapper.insert(deskworkout);
         Optional<Deskworkout> actual = deskworkoutMapper.findById(deskworkout.getId());
         assertThat(actual).isPresent();
@@ -66,6 +68,7 @@ class DeskworkoutMapperTest {
 
     @Test
     @DataSet(value = "datasets/deskworkouts.yml")
+    @ExpectedDataSet(value = "expected-datasets/deskworkouts-after-update.yml")
     @Transactional
     void 指定したIDが存在するときにそのレコードを更新できること() {
         Deskworkout newDeskworkout = new Deskworkout(1, "new name", "new howTo", 5, "new bodyParts", "new level");
@@ -77,6 +80,7 @@ class DeskworkoutMapperTest {
 
     @Test
     @DataSet(value = "datasets/deskworkouts.yml")
+    @ExpectedDataSet(value = "expected-datasets/deskworkouts-after-delete.yml")
     @Transactional
     void 指定したIDが存在するときにそのレコードを削除できること() {
         deskworkoutMapper.delete(1);
