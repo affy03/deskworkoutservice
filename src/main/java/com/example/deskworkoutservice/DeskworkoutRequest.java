@@ -14,7 +14,7 @@ public class DeskworkoutRequest {
 
     @NotBlank(message = "空白は許可されていません")
     @Size(max = 100, message = "動作説明は{max}文字以内で入力してください")
-    private String howTo;
+    private String howto;
 
     @NotNull(message = "空白は許可されていません")
     @Positive(message = "レップ数は自然数で入力してください")
@@ -28,9 +28,9 @@ public class DeskworkoutRequest {
     @Size(max = 20, message = "難易度は{max}文字以内で入力してください")
     private String difficulty;
 
-    public DeskworkoutRequest(String name, String howTo, int repetition, String bodyParts, String difficulty) {
+    public DeskworkoutRequest(String name, String howto, int repetition, String bodyParts, String difficulty) {
         this.name = name;
-        this.howTo = howTo;
+        this.howto = howto;
         this.repetition = repetition;
         this.bodyParts = bodyParts;
         this.difficulty = difficulty;
@@ -40,8 +40,8 @@ public class DeskworkoutRequest {
         return name;
     }
 
-    public String getHowTo() {
-        return howTo;
+    public String getHowto() {
+        return howto;
     }
 
     public int getRepetition() {

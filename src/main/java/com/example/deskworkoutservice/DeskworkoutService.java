@@ -27,10 +27,10 @@ public class DeskworkoutService {
                 .orElseThrow(() -> new DeskworkoutNotFoundException("Workout with id:" + id + " not found"));
     }
 
-    public Deskworkout insert(String name, String howTo, Integer repetition, String bodyParts, String difficulty) {
+    public Deskworkout insert(String name, String howto, Integer repetition, String bodyParts, String difficulty) {
         Deskworkout deskworkout = new Deskworkout();
         deskworkout.setName(name);
-        deskworkout.setHowto(howTo);
+        deskworkout.setHowto(howto);
         deskworkout.setRepetition(repetition);
         deskworkout.setBodyParts(bodyParts);
         deskworkout.setDifficulty(difficulty);
@@ -38,12 +38,12 @@ public class DeskworkoutService {
         return deskworkout;
     }
 
-    public Deskworkout update(Integer id, String name, String howTo, Integer repetition, String bodyParts, String difficulty) {
+    public Deskworkout update(Integer id, String name, String howto, Integer repetition, String bodyParts, String difficulty) {
         Deskworkout deskworkout = deskworkoutMapper.findById(id)
                 .orElseThrow(() -> new DeskworkoutNotFoundException("Workout with id:" + id + " not found"));
 
         deskworkout.setName(name);
-        deskworkout.setHowto(howTo);
+        deskworkout.setHowto(howto);
         deskworkout.setRepetition(repetition);
         deskworkout.setBodyParts(bodyParts);
         deskworkout.setDifficulty(difficulty);

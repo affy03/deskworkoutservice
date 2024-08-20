@@ -1,5 +1,9 @@
-package com.example.deskworkoutservice;
+package com.example.deskworkoutservice.service;
 
+import com.example.deskworkoutservice.Deskworkout;
+import com.example.deskworkoutservice.DeskworkoutMapper;
+import com.example.deskworkoutservice.DeskworkoutNotFoundException;
+import com.example.deskworkoutservice.DeskworkoutService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
