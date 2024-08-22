@@ -81,7 +81,7 @@ public class DeskworkoutRestApiIntegrationTest {
     @Test
     @DataSet(value = "datasets/deskworkouts.yml")
     @Transactional
-    void 存在しないクエリ文字列を指定したときに空文字が返ること() throws Exception {
+    void 存在しないクエリ文字列を指定したときに空の配列が返ること() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.get("/deskworkouts?=bodyParts=腕"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().json("[]"));
