@@ -22,11 +22,11 @@ public interface DeskworkoutMapper {
     @Select("SELECT * FROM deskworkouts WHERE id = #{id}")
     Optional<Deskworkout> findById(int id);
 
-    @Insert("INSERT INTO deskworkouts  (name, howTo, repetition, bodyParts, difficulty ) VALUES (#{name},#{howTo},#{repetition},#{bodyParts},#{difficulty})")
+    @Insert("INSERT INTO deskworkouts  (name, howto, repetition, bodyParts, difficulty ) VALUES (#{name},#{howto},#{repetition},#{bodyParts},#{difficulty})")
     @Options(useGeneratedKeys = true, keyProperty = "id")
     void insert(Deskworkout deskworkout);
 
-    @Update("UPDATE deskworkouts SET name=#{name}, howTo=#{howTo}, repetition=#{repetition}, bodyParts=#{bodyParts}, difficulty=#{difficulty} WHERE id = #{id}")
+    @Update("UPDATE deskworkouts SET name=#{name}, howto=#{howto}, repetition=#{repetition}, bodyParts=#{bodyParts}, difficulty=#{difficulty} WHERE id = #{id}")
     void update(Deskworkout deskworkout);
 
     @Delete("DELETE FROM deskworkouts WHERE id = #{id}")

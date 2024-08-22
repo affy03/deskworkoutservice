@@ -38,7 +38,7 @@ public class DeskworkoutController {
     public ResponseEntity<DeskworkoutResponse> insert(@RequestBody @Valid DeskworkoutRequest deskworkoutRequest, UriComponentsBuilder uriBuilder) {
         Deskworkout deskworkout = deskworkoutService.insert(
                 deskworkoutRequest.getName(),
-                deskworkoutRequest.getHowTo(),
+                deskworkoutRequest.getHowto(),
                 deskworkoutRequest.getRepetition(),
                 deskworkoutRequest.getBodyParts(),
                 deskworkoutRequest.getDifficulty()
@@ -53,7 +53,7 @@ public class DeskworkoutController {
         deskworkoutService.update(
                 id,
                 deskworkoutRequest.getName(),
-                deskworkoutRequest.getHowTo(),
+                deskworkoutRequest.getHowto(),
                 deskworkoutRequest.getRepetition(),
                 deskworkoutRequest.getBodyParts(),
                 deskworkoutRequest.getDifficulty());

@@ -1,31 +1,31 @@
 deskworkouts:
   - id: 1
     name: "シットアップ"
-    howTo: "直角に曲げた膝を机裏にタッチする"
+    howto: "直角に曲げた膝を机裏にタッチする"
     repetition: 10
     bodyParts: "お腹"
     difficulty: "初級"
   - id: 2
     name: "バックエクステンション"
-    howTo: "お尻を背もたれに付けたまま、デコルテを机に近づける"
+    howto: "お尻を背もたれに付けたまま、デコルテを机に近づける"
     repetition: 10
     bodyParts: "背中"
     difficulty: "中級"
   - id: 3
     name: "ショルダーダウン"
-    howTo: "肘で背もたれを押したまま、肩を引き下げる"
+    howto: "肘で背もたれを押したまま、肩を引き下げる"
     repetition: 1
     bodyParts: "肩"
     difficulty: "初級"
   - id: 4
     name: "ニーエクステンション"
-    howTo: "内ももをくっ付けたまま、膝を伸ばす"
+    howto: "内ももをくっ付けたまま、膝を伸ばす"
     repetition: 10
     bodyParts: "脚"
     difficulty: "初級"
   - id: 5
     name: "スクワット"
-    howTo: "片膝を斜め横に向けたまま、お尻を椅子から持ち上げる"
+    howto: "片膝を斜め横に向けたまま、お尻を椅子から持ち上げる"
     repetition: 10
     bodyParts: "お尻"
     difficulty: "上級"
