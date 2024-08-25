@@ -29,7 +29,7 @@ public class DeskworkoutRestApiIntegrationTest {
     @Test
     @DataSet(value = "datasets/deskworkouts.yml")
     @Transactional
-    void null又は空のクエリ文字列を渡したときに全件取得できること() throws Exception {
+    void nullのクエリ文字列を渡したときに全件取得できること() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.get("/deskworkouts"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().json("""
@@ -76,6 +76,58 @@ public class DeskworkoutRestApiIntegrationTest {
                             }
                         ]
                         """, true));
+    }
+
+    @Test
+    @DataSet(value = "datasets/deskworkouts.yml")
+    @Transactional
+    void 空のクエリ文字列を渡したときに全件取得できること() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.get("/deskworkouts"))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.content().json("""
+                        [
+                            {
+                                "id": 1,
+                                "name": "シットアップ",
+                                "howto": "直角に曲げた膝を机裏にタッチする",
+                                "repetition": 10,
+                                "bodyParts": "お腹",
+                                "difficulty": "初級"
+                            },
+                            {
+                                "id": 2,
+                                "name": "バックエクステンション",
+                                "howto": "お尻を背もたれに付けたまま、デコルテを机に近づける",
+                                "repetition": 10,
+                                "bodyParts": "背中",
+                                "difficulty": "中級"
+                            },
+                            {
+                                "id": 3,
+                                "name": "ショルダーダウン",
+                                "howto": "肘で背もたれを押したまま、肩を引き下げる",
+                                "repetition": 1,
+                                "bodyParts": "肩",
+                                "difficulty": "初級"
+                            },
+                            {
+                                "id": 4,
+                                "name": "ニーエクステンション",
+                                "howto": "内ももをくっ付けたまま、膝を伸ばす",
+                                "repetition": 10,
+                                "bodyParts": "脚",
+                                "difficulty": "初級"
+                            },
+                            {
+                                "id": 5,
+                                "name": "スクワット",
+                                "howto": "片膝を斜め横に向けたまま、お尻を椅子から持ち上げる",
+                                "repetition": 10,
+                                "bodyParts": "お尻",
+                                "difficulty": "上級"
+                            }
+                        ]
+                        """));
     }
 
     @Test
