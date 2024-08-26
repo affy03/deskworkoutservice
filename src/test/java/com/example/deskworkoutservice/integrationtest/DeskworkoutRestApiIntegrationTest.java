@@ -163,7 +163,7 @@ public class DeskworkoutRestApiIntegrationTest {
     @DataSet(value = "datasets/deskworkouts.yml")
     @Transactional
     void 存在するIDを指定したときにそのレコードを取得できること() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("/deskworkouts/2"))
+        mockMvc.perform(MockMvcRequestBuilders.get("/deskworkouts/3"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().json("""
                         {
