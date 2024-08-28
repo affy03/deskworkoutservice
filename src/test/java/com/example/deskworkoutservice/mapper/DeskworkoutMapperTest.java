@@ -1,7 +1,6 @@
 package com.example.deskworkoutservice.mapper;
 
-import com.example.deskworkoutservice.Deskworkout;
-import com.example.deskworkoutservice.DeskworkoutMapper;
+import com.example.deskworkoutservice.entity.Deskworkout;
 import com.github.database.rider.core.api.dataset.DataSet;
 import com.github.database.rider.core.api.dataset.ExpectedDataSet;
 import com.github.database.rider.spring.api.DBRider;

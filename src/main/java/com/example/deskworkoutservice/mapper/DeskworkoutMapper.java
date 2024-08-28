@@ -1,5 +1,6 @@
-package com.example.deskworkoutservice;
+package com.example.deskworkoutservice.mapper;
 
+import com.example.deskworkoutservice.entity.Deskworkout;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;

@@ -1,5 +1,8 @@
-package com.example.deskworkoutservice;
+package com.example.deskworkoutservice.service;
 
+import com.example.deskworkoutservice.entity.Deskworkout;
+import com.example.deskworkoutservice.exception.DeskworkoutNotFoundException;
+import com.example.deskworkoutservice.mapper.DeskworkoutMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
