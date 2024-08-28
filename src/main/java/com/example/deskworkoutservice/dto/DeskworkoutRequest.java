@@ -1,4 +1,4 @@
-package com.example.deskworkoutservice;
+package com.example.deskworkoutservice.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

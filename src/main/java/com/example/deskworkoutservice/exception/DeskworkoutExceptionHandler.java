@@ -1,4 +1,4 @@
-package com.example.deskworkoutservice;
+package com.example.deskworkoutservice.exception;
 
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;

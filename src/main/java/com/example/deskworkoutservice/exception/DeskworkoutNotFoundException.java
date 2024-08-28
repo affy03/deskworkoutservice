@@ -1,4 +1,4 @@
-package com.example.deskworkoutservice;
+package com.example.deskworkoutservice.exception;
 
 public class DeskworkoutNotFoundException extends RuntimeException {
     public DeskworkoutNotFoundException(String message) {

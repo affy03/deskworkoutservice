@@ -25,12 +25,177 @@ public class DeskworkoutRestApiIntegrationTest {
     @Autowired
     MockMvc mockMvc;
 
-    //Read処理の結合テスト
+    //Read処理の結合テスト(利用者用)
+    @Test
+    @DataSet(value = "datasets/deskworkouts.yml")
+    @Transactional
+    void nullのクエリ文字列を渡したときに全件取得できること_利用者用() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.get("/user/deskworkouts"))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.content().json("""
+                        [
+                            {
+                                "id": 1,
+                                "name": "シットアップ",
+                                "howto": "直角に曲げた膝を机裏にタッチする",
+                                "repetition": 10,
+                                "bodyParts": "お腹",
+                                "difficulty": "初級"
+                            },
+                            {
+                                "id": 2,
+                                "name": "バックエクステンション",
+                                "howto": "お尻を背もたれに付けたまま、デコルテを机に近づける",
+                                "repetition": 10,
+                                "bodyParts": "背中",
+                                "difficulty": "中級"
+                            },
+                            {
+                                "id": 3,
+                                "name": "ショルダーダウン",
+                                "howto": "肘で背もたれを押したまま、肩を引き下げる",
+                                "repetition": 1,
+                                "bodyParts": "肩",
+                                "difficulty": "初級"
+                            },
+                            {
+                                "id": 4,
+                                "name": "ニーエクステンション",
+                                "howto": "内ももをくっ付けたまま、膝を伸ばす",
+                                "repetition": 10,
+                                "bodyParts": "脚",
+                                "difficulty": "初級"
+                            },
+                            {
+                                "id": 5,
+                                "name": "スクワット",
+                                "howto": "片膝を斜め横に向けたまま、お尻を椅子から持ち上げる",
+                                "repetition": 10,
+                                "bodyParts": "お尻",
+                                "difficulty": "上級"
+                            }
+                        ]
+                        """, true));
+    }
+
+    @Test
+    @DataSet(value = "datasets/deskworkouts.yml")
+    @Transactional
+    void 空のクエリ文字列を渡したときに全件取得できること_利用者用() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.get("/user/deskworkouts?bodyParts="))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.content().json("""
+                        [
+                            {
+                                "id": 1,
+                                "name": "シットアップ",
+                                "howto": "直角に曲げた膝を机裏にタッチする",
+                                "repetition": 10,
+                                "bodyParts": "お腹",
+                                "difficulty": "初級"
+                            },
+                            {
+                                "id": 2,
+                                "name": "バックエクステンション",
+                                "howto": "お尻を背もたれに付けたまま、デコルテを机に近づける",
+                                "repetition": 10,
+                                "bodyParts": "背中",
+                                "difficulty": "中級"
+                            },
+                            {
+                                "id": 3,
+                                "name": "ショルダーダウン",
+                                "howto": "肘で背もたれを押したまま、肩を引き下げる",
+                                "repetition": 1,
+                                "bodyParts": "肩",
+                                "difficulty": "初級"
+                            },
+                            {
+                                "id": 4,
+                                "name": "ニーエクステンション",
+                                "howto": "内ももをくっ付けたまま、膝を伸ばす",
+                                "repetition": 10,
+                                "bodyParts": "脚",
+                                "difficulty": "初級"
+                            },
+                            {
+                                "id": 5,
+                                "name": "スクワット",
+                                "howto": "片膝を斜め横に向けたまま、お尻を椅子から持ち上げる",
+                                "repetition": 10,
+                                "bodyParts": "お尻",
+                                "difficulty": "上級"
+                            }
+                        ]
+                        """));
+    }
+
+    @Test
+    @DataSet(value = "datasets/deskworkouts.yml")
+    @Transactional
+    void 存在しないクエリ文字列を指定したときに空の配列が返ること_利用者用() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.get("/user/deskworkouts?bodyParts=腕"))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.content().json("[]"));
+    }
+
+    @Test
+    @DataSet(value = "datasets/deskworkouts.yml")
+    @Transactional
+    void 正常なクエリ文字列を渡したときそのレコードを取得できること_利用者用() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.get("/user/deskworkouts?bodyParts=お腹"))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.content().json("""
+                        [
+                            {
+                                "id": 1,
+                                "name": "シットアップ",
+                                "howto": "直角に曲げた膝を机裏にタッチする",
+                                "repetition": 10,
+                                "bodyParts": "お腹",
+                                "difficulty": "初級"
+                            }
+                        ]
+                        """, true));
+    }
+
+    @Test
+    @DataSet(value = "datasets/deskworkouts.yml")
+    @Transactional
+    void 存在するIDを指定したときにそのレコードを取得できること_利用者用() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.get("/user/deskworkouts/2"))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.content().json("""
+                        {
+                            "id": 2,
+                            "name": "バックエクステンション",
+                            "howto": "お尻を背もたれに付けたまま、デコルテを机に近づける",
+                            "repetition": 10,
+                            "bodyParts": "背中",
+                            "difficulty": "中級"
+                        }
+                        """, true));
+    }
+
+    @Test
+    @DataSet(value = "datasets/deskworkouts.yml")
+    @Transactional
+    void 存在しないIDを指定したとき例外が発生すること_利用者用() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.get("/user/deskworkouts/100"))
+                .andExpect(MockMvcResultMatchers.status().isNotFound())
+                //JSONボディ内のstatusフィールドが404であることを確認
+                .andExpect(MockMvcResultMatchers.jsonPath("$.status").value("404"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.message").value("Workout with id:100 not found"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.error").value("Not Found"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.path").value("/user/deskworkouts/100"));
+    }
+
+    //Read処理の結合テスト(管理者用)
     @Test
     @DataSet(value = "datasets/deskworkouts.yml")
     @Transactional
     void nullのクエリ文字列を渡したときに全件取得できること() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("/deskworkouts"))
+        mockMvc.perform(MockMvcRequestBuilders.get("/admin/deskworkouts"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().json("""
                         [
@@ -82,7 +247,7 @@ public class DeskworkoutRestApiIntegrationTest {
     @DataSet(value = "datasets/deskworkouts.yml")
     @Transactional
     void 空のクエリ文字列を渡したときに全件取得できること() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("/deskworkouts"))
+        mockMvc.perform(MockMvcRequestBuilders.get("/admin/deskworkouts?bodyParts="))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().json("""
                         [
@@ -134,7 +299,7 @@ public class DeskworkoutRestApiIntegrationTest {
     @DataSet(value = "datasets/deskworkouts.yml")
     @Transactional
     void 存在しないクエリ文字列を指定したときに空の配列が返ること() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("/deskworkouts?=bodyParts=腕"))
+        mockMvc.perform(MockMvcRequestBuilders.get("/admin/deskworkouts?bodyParts=腕"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().json("[]"));
     }
@@ -143,7 +308,7 @@ public class DeskworkoutRestApiIntegrationTest {
     @DataSet(value = "datasets/deskworkouts.yml")
     @Transactional
     void 正常なクエリ文字列を渡したときそのレコードを取得できること() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("/deskworkouts?bodyParts=お腹"))
+        mockMvc.perform(MockMvcRequestBuilders.get("/admin/deskworkouts?bodyParts=お腹"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().json("""
                         [
@@ -163,7 +328,7 @@ public class DeskworkoutRestApiIntegrationTest {
     @DataSet(value = "datasets/deskworkouts.yml")
     @Transactional
     void 存在するIDを指定したときにそのレコードを取得できること() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("/deskworkouts/2"))
+        mockMvc.perform(MockMvcRequestBuilders.get("/admin/deskworkouts/2"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().json("""
                         {
@@ -181,16 +346,16 @@ public class DeskworkoutRestApiIntegrationTest {
     @DataSet(value = "datasets/deskworkouts.yml")
     @Transactional
     void 存在しないIDを指定したとき例外が発生すること() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("/deskworkouts/100"))
+        mockMvc.perform(MockMvcRequestBuilders.get("/admin/deskworkouts/100"))
                 .andExpect(MockMvcResultMatchers.status().isNotFound())
                 //JSONボディ内のstatusフィールドが404であることを確認
                 .andExpect(MockMvcResultMatchers.jsonPath("$.status").value("404"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.message").value("Workout with id:100 not found"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.error").value("Not Found"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.path").value("/deskworkouts/100"));
+                .andExpect(MockMvcResultMatchers.jsonPath("$.path").value("/admin/deskworkouts/100"));
     }
 
-    //Create処理の結合テスト
+    //Create処理の結合テスト(管理者用)
     @Test
     @DataSet(value = "datasets/deskworkouts.yml")
     @ExpectedDataSet(value = "expected-datasets/deskworkouts-after-insert.yml", ignoreCols = "id")
@@ -206,7 +371,7 @@ public class DeskworkoutRestApiIntegrationTest {
                 }
                 """;
 
-        mockMvc.perform(MockMvcRequestBuilders.post("/deskworkouts")
+        mockMvc.perform(MockMvcRequestBuilders.post("/admin/deskworkouts")
                         .contentType(APPLICATION_JSON)
                         .content(newDeskworkout))
                 .andExpect(MockMvcResultMatchers.status().isCreated())
@@ -231,7 +396,7 @@ public class DeskworkoutRestApiIntegrationTest {
                 }
                 """;
 
-        mockMvc.perform(MockMvcRequestBuilders.post("/deskworkouts")
+        mockMvc.perform(MockMvcRequestBuilders.post("/admin/deskworkouts")
                         .contentType(APPLICATION_JSON)
                         .content(invalidDeskworkout))
                 .andExpect(MockMvcResultMatchers.status().isBadRequest())
@@ -244,7 +409,7 @@ public class DeskworkoutRestApiIntegrationTest {
                         """, true));
     }
 
-    //Update処理の結合テスト
+    //Update処理の結合テスト(管理者用)
     @Test
     @DataSet(value = "datasets/deskworkouts.yml")
     @ExpectedDataSet(value = "expected-datasets/deskworkouts-after-update.yml")
@@ -260,7 +425,7 @@ public class DeskworkoutRestApiIntegrationTest {
                 }
                 """;
 
-        mockMvc.perform(MockMvcRequestBuilders.patch("/deskworkouts/1")
+        mockMvc.perform(MockMvcRequestBuilders.patch("/admin/deskworkouts/1")
                         .contentType(APPLICATION_JSON)
                         .content(newDeskworkout))
                 .andExpect(MockMvcResultMatchers.status().isOk())
@@ -285,14 +450,14 @@ public class DeskworkoutRestApiIntegrationTest {
                 }
                 """;
 
-        mockMvc.perform(MockMvcRequestBuilders.patch("/deskworkouts/100")
+        mockMvc.perform(MockMvcRequestBuilders.patch("/admin/deskworkouts/100")
                         .contentType(APPLICATION_JSON)
                         .content(notFoundDeskworkout))
                 .andExpect(MockMvcResultMatchers.status().isNotFound())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.status").value("404"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.message").value("Workout with id:100 not found"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.error").value("Not Found"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.path").value("/deskworkouts/100"));
+                .andExpect(MockMvcResultMatchers.jsonPath("$.path").value("/admin/deskworkouts/100"));
     }
 
     @Test
@@ -309,7 +474,7 @@ public class DeskworkoutRestApiIntegrationTest {
                 }
                 """;
 
-        mockMvc.perform(MockMvcRequestBuilders.patch("/deskworkouts/2")
+        mockMvc.perform(MockMvcRequestBuilders.patch("/admin/deskworkouts/2")
                         .contentType(APPLICATION_JSON)
                         .content(invalidDeskworkout))
                 .andExpect(MockMvcResultMatchers.status().isBadRequest())
@@ -322,13 +487,13 @@ public class DeskworkoutRestApiIntegrationTest {
                         """, true));
     }
 
-    //Delete処理の結合テスト
+    //Delete処理の結合テスト(管理者用)
     @Test
     @DataSet(value = "datasets/deskworkouts.yml")
     @ExpectedDataSet(value = "expected-datasets/deskworkouts-after-delete.yml")
     @Transactional
     void 存在するIDを指定したときにそのレコードを削除できること() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.delete("/deskworkouts/1"))
+        mockMvc.perform(MockMvcRequestBuilders.delete("/admin/deskworkouts/1"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().json("""
                         {
@@ -341,11 +506,11 @@ public class DeskworkoutRestApiIntegrationTest {
     @DataSet(value = "datasets/deskworkouts.yml")
     @Transactional
     void 存在しないIDを指定したときに例外が発生しレコードを削除できないこと() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.delete("/deskworkouts/100"))
+        mockMvc.perform(MockMvcRequestBuilders.delete("/admin/deskworkouts/100"))
                 .andExpect(MockMvcResultMatchers.status().isNotFound())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.status").value("404"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.message").value("Workout with id:100 not found"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.error").value("Not Found"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.path").value("/deskworkouts/100"));
+                .andExpect(MockMvcResultMatchers.jsonPath("$.path").value("/admin/deskworkouts/100"));
     }
 }

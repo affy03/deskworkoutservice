@@ -1,4 +1,4 @@
-package com.example.deskworkoutservice;
+package com.example.deskworkoutservice.dto;
 
 public class DeskworkoutResponse {
     private String message;

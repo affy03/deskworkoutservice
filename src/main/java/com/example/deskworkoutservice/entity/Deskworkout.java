@@ -1,4 +1,4 @@
-package com.example.deskworkoutservice;
+package com.example.deskworkoutservice.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
